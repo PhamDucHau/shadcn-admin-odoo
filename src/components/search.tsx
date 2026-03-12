@@ -22,6 +22,7 @@ export function Search({
         className
       )}
       onClick={() => setOpen(true)}
+      title='Search (Ctrl+K)'
     >
       <SearchIcon
         aria-hidden='true'

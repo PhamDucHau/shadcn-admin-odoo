@@ -4,6 +4,36 @@ import { getCookie, setCookie, removeCookie } from '@/lib/cookies'
 type Theme = 'dark' | 'light' | 'system'
 type ResolvedTheme = Exclude<Theme, 'system'>
 
+// Enhanced theme configuration
+interface ThemeConfig {
+  primary?: string
+  secondary?: string
+  accent?: string
+  neutral?: string
+  background?: string
+  surface?: string
+}
+
+// Predefined theme configurations
+const themeConfigs: Record<ResolvedTheme, ThemeConfig> = {
+  light: {
+    primary: 'hsl(210 40% 98%)',
+    secondary: 'hsl(210 40% 96%)',
+    accent: 'hsl(210 40% 94%)',
+    neutral: 'hsl(210 40% 92%)',
+    background: 'hsl(210 40% 98%)',
+    surface: 'hsl(210 40% 96%)',
+  },
+  dark: {
+    primary: 'hsl(210 40% 98%)',
+    secondary: 'hsl(210 40% 96%)',
+    accent: 'hsl(210 40% 94%)',
+    neutral: 'hsl(210 40% 92%)',
+    background: 'hsl(210 40% 98%)',
+    surface: 'hsl(210 40% 96%)',
+  },
+}
+
 const DEFAULT_THEME = 'system'
 const THEME_COOKIE_NAME = 'vite-ui-theme'
 const THEME_COOKIE_MAX_AGE = 60 * 60 * 24 * 365 // 1 year
@@ -18,6 +48,7 @@ type ThemeProviderState = {
   defaultTheme: Theme
   resolvedTheme: ResolvedTheme
   theme: Theme
+  config: ThemeConfig
   setTheme: (theme: Theme) => void
   resetTheme: () => void
 }
@@ -26,6 +57,7 @@ const initialState: ThemeProviderState = {
   defaultTheme: DEFAULT_THEME,
   resolvedTheme: 'light',
   theme: DEFAULT_THEME,
+  config: themeConfigs.light,
   setTheme: () => null,
   resetTheme: () => null,
 }
@@ -91,6 +123,7 @@ export function ThemeProvider({
     resetTheme,
     theme,
     setTheme,
+    config: themeConfigs[resolvedTheme],
   }
 
   return (

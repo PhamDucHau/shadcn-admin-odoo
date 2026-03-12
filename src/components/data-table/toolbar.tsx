@@ -1,5 +1,6 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { type Table } from '@tanstack/react-table'
+import { ExportMenu } from '@/lib/export-utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { DataTableFacetedFilter } from './faceted-filter'
@@ -9,6 +10,8 @@ type DataTableToolbarProps<TData> = {
   table: Table<TData>
   searchPlaceholder?: string
   searchKey?: string
+  data?: any[]
+  fileName?: string
   filters?: {
     columnId: string
     title: string
@@ -24,6 +27,8 @@ export function DataTableToolbar<TData>({
   table,
   searchPlaceholder = 'Filter...',
   searchKey,
+  data = [],
+  fileName = 'data',
   filters = [],
 }: DataTableToolbarProps<TData>) {
   const isFiltered =
@@ -80,6 +85,7 @@ export function DataTableToolbar<TData>({
         )}
       </div>
       <DataTableViewOptions table={table} />
+      <ExportMenu data={data} filename={fileName} />
     </div>
   )
 }

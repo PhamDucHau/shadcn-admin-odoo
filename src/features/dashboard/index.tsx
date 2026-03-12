@@ -15,6 +15,10 @@ import { ProfileDropdown } from '@/components/profile-dropdown'
 import { Search } from '@/components/search'
 import { ThemeSwitch } from '@/components/theme-switch'
 import { Analytics } from './components/analytics'
+import {
+  InteractiveOverview,
+  DistributionChart,
+} from './components/interactive-charts'
 import { Overview } from './components/overview'
 import { RecentSales } from './components/recent-sales'
 
@@ -49,6 +53,7 @@ export function Dashboard() {
             <TabsList>
               <TabsTrigger value='overview'>Overview</TabsTrigger>
               <TabsTrigger value='analytics'>Analytics</TabsTrigger>
+              <TabsTrigger value='interactive'>Interactive</TabsTrigger>
               <TabsTrigger value='reports' disabled>
                 Reports
               </TabsTrigger>
@@ -185,6 +190,16 @@ export function Dashboard() {
           </TabsContent>
           <TabsContent value='analytics' className='space-y-4'>
             <Analytics />
+          </TabsContent>
+          <TabsContent value='interactive' className='space-y-4'>
+            <div className='grid gap-4 lg:grid-cols-3'>
+              <div className='lg:col-span-2'>
+                <InteractiveOverview />
+              </div>
+              <div>
+                <DistributionChart />
+              </div>
+            </div>
           </TabsContent>
         </Tabs>
       </Main>
